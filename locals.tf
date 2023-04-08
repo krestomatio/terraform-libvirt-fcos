@@ -1,0 +1,68 @@
+locals {
+  hostname           = var.fqdn
+  os_additional_rpms = var.qemu_agent ? { list = concat(var.additional_rpms.list, ["qemu-guest-agent"]), cmd_post = concat(var.additional_rpms.cmd_post, ["/usr/bin/systemctl enable --now qemu-guest-agent.service"]), cmd_pre = var.additional_rpms.cmd_pre } : var.additional_rpms
+  libvirt_domain_additional_disks = flatten(
+    [
+      var.log_volume ? [{ volume_id = libvirt_volume.log[0].id }] : [],
+      var.data_volume ? [{ volume_id = libvirt_volume.data[0].id }] : [],
+      var.backup_volume ? [{ volume_id = libvirt_volume.backup[0].id }] : []
+    ]
+  )
+  storage_disks = flatten(
+    [
+      var.log_volume ? [{ label = "log", path = var.log_volume_path }] : [],
+      var.data_volume ? [{ label = "data", path = var.data_volume_path }] : [],
+      var.backup_volume ? [{ label = "backup", path = var.backup_volume_path }] : []
+    ]
+  )
+  disk_devices = [
+    "/dev/vdb",
+    "/dev/vdc",
+    "/dev/vdd"
+  ]
+  storage = {
+    disks = [for index, disk in local.storage_disks :
+      {
+        device     = local.disk_devices[index]
+        wipe_table = true
+        partitions = [
+          {
+            resize    = true
+            label     = disk.label
+            number    = 1
+            size_mib  = 0
+            start_mib = 0
+          }
+        ]
+      }
+    ]
+    filesystems = [for index, disk in local.storage_disks :
+      {
+        device          = "/dev/disk/by-partlabel/${disk.label}"
+        path            = disk.path
+        format          = "xfs"
+        label           = disk.label
+        with_mount_unit = true
+      }
+    ]
+  }
+  butane_k3s_snippets = compact(
+    [
+      module.butane_common_snippets.hostname,
+      module.butane_common_snippets.keymap,
+      module.butane_common_snippets.timezone,
+      module.butane_common_snippets.updates_periodic_window,
+      module.butane_common_snippets.rollout_wariness,
+      module.butane_common_snippets.core_authorized_key,
+      module.butane_common_snippets.static_interface,
+      module.butane_common_snippets.etc_hosts,
+      module.butane_common_snippets.disks,
+      module.butane_common_snippets.filesystems,
+      module.butane_common_snippets.additional_rpms,
+      module.butane_common_snippets.sync_time_with_host,
+      module.butane_common_snippets.systemd_pager,
+      module.butane_common_snippets.do_not_countme
+    ]
+  )
+  butane_snippets = concat(local.butane_k3s_snippets, var.butane_snippets_additional)
+}
