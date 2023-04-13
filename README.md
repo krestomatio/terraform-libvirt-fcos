@@ -1,5 +1,9 @@
 Terraform module to quickly generate a virtual machine using [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/) and [Libvirt](https://libvirt.org/).
 
+## Dependencies
+The following are the dependencies to create k3s cluster with this module:
+* [libvirt](https://libvirt.org/)
+
 ## Requirements
 
 | Name                                                                      | Version  |
