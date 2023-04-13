@@ -29,9 +29,14 @@ locals {
   }
   etc_hosts = [
     {
-      ip       = "192.168.0.10"
+      ip       = "127.0.0.1"
       hostname = "server-01"
       fqdn     = "server-01.example.com"
+    },
+    {
+      ip       = "192.168.0.10"
+      hostname = "other-server-01"
+      fqdn     = "other-server-01.example.com"
     }
   ]
 
