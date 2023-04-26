@@ -166,6 +166,13 @@ variable "memory" {
   nullable    = false
 }
 
+variable "root_volume_format" {
+  type        = string
+  description = "Node default root volume mount format"
+  default     = "qcow2"
+  nullable    = false
+}
+
 variable "root_volume_pool" {
   type        = string
   description = "Node default root volume pool"
@@ -198,6 +205,13 @@ variable "log_volume" {
   nullable    = false
 }
 
+variable "log_volume_format" {
+  type        = string
+  description = "Node default log volume mount format"
+  default     = "qcow2"
+  nullable    = false
+}
+
 variable "log_volume_path" {
   type        = string
   description = "Node default log volume mount path "
@@ -225,6 +239,13 @@ variable "data_volume" {
   nullable    = false
 }
 
+variable "data_volume_format" {
+  type        = string
+  description = "Node default data volume mount format"
+  default     = "qcow2"
+  nullable    = false
+}
+
 variable "data_volume_path" {
   type        = string
   description = "Node default data volume mount path "
@@ -249,6 +270,13 @@ variable "backup_volume" {
   type        = bool
   description = "Create backup volume"
   default     = true
+  nullable    = false
+}
+
+variable "backup_volume_format" {
+  type        = string
+  description = "Node default backup volume mount format"
+  default     = "qcow2"
   nullable    = false
 }
 

@@ -1,5 +1,5 @@
 resource "libvirt_volume" "root" {
-  name             = "${local.hostname}-root.qcow2"
+  name             = var.root_volume_format != "" ? "${local.hostname}-root.${var.root_volume_format}" : "${local.hostname}-root"
   pool             = var.root_volume_pool
   size             = var.root_volume_size
   base_volume_name = var.root_base_volume_name
@@ -16,7 +16,7 @@ resource "libvirt_volume" "root" {
 resource "libvirt_volume" "log" {
   count = var.log_volume ? 1 : 0
 
-  name = "${local.hostname}-log.qcow2"
+  name = var.log_volume_format != "" ? "${local.hostname}-log.${var.log_volume_format}" : "${local.hostname}-log"
   pool = var.log_volume_pool
   size = var.log_volume_size
 
@@ -31,7 +31,7 @@ resource "libvirt_volume" "log" {
 resource "libvirt_volume" "data" {
   count = var.data_volume ? 1 : 0
 
-  name = "${local.hostname}-data.qcow2"
+  name = var.data_volume_format != "" ? "${local.hostname}-data.${var.data_volume_format}" : "${local.hostname}-data"
   pool = var.data_volume_pool
   size = var.data_volume_size
   lifecycle {
@@ -45,7 +45,7 @@ resource "libvirt_volume" "data" {
 resource "libvirt_volume" "backup" {
   count = var.backup_volume ? 1 : 0
 
-  name = "${local.hostname}-backup.qcow2"
+  name = var.backup_volume_format != "" ? "${local.hostname}-backup.${var.backup_volume_format}" : "${local.hostname}-backup"
   pool = var.backup_volume_pool
   size = var.backup_volume_size
 
