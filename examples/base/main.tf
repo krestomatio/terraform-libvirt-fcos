@@ -22,10 +22,20 @@ locals {
   additional_rpms = {
     list = ["nano"]
   }
-  updates_periodic_window = {
-    days           = ["Sun"]
-    start_time     = "00:00"
-    length_minutes = "60"
+  periodic_updates = {
+    time_zone = "localtime"
+    windows = [
+      {
+        days           = ["Sat"],
+        start_time     = "23:30",
+        length_minutes = "60"
+      },
+      {
+        days           = ["Sun"],
+        start_time     = "00:30",
+        length_minutes = "60"
+      }
+    ]
   }
   etc_hosts = [
     {
@@ -89,27 +99,27 @@ module "libvirt_fcos_base" {
 
   source = "../.."
 
-  fqdn                    = local.fqdn
-  cidr_ip_address         = local.cidr_ip_address
-  mac                     = local.mac
-  qemu_agent              = local.qemu_agent
-  systemd_pager           = local.systemd_pager
-  ssh_authorized_key      = local.ssh_authorized_key
-  nameservers             = local.nameservers
-  timezone                = local.timezone
-  do_not_countme          = local.do_not_countme
-  rollout_wariness        = local.rollout_wariness
-  updates_periodic_window = local.updates_periodic_window
-  keymap                  = local.keymap
-  sync_time_with_host     = local.sync_time_with_host
-  etc_hosts               = local.etc_hosts
-  additional_rpms         = local.additional_rpms
-  vcpu                    = local.vcpu
-  memory                  = local.memory
-  root_volume_size        = local.root_volume_size
-  log_volume_size         = local.log_volume_size
-  data_volume_size        = local.data_volume_size
-  backup_volume_size      = local.backup_volume_size
+  fqdn                = local.fqdn
+  cidr_ip_address     = local.cidr_ip_address
+  mac                 = local.mac
+  qemu_agent          = local.qemu_agent
+  systemd_pager       = local.systemd_pager
+  ssh_authorized_key  = local.ssh_authorized_key
+  nameservers         = local.nameservers
+  timezone            = local.timezone
+  do_not_countme      = local.do_not_countme
+  rollout_wariness    = local.rollout_wariness
+  periodic_updates    = local.periodic_updates
+  keymap              = local.keymap
+  sync_time_with_host = local.sync_time_with_host
+  etc_hosts           = local.etc_hosts
+  additional_rpms     = local.additional_rpms
+  vcpu                = local.vcpu
+  memory              = local.memory
+  root_volume_size    = local.root_volume_size
+  log_volume_size     = local.log_volume_size
+  data_volume_size    = local.data_volume_size
+  backup_volume_size  = local.backup_volume_size
 
   root_base_volume_name = libvirt_volume.fcos_image.name
   network_id            = libvirt_network.libvirt_fcos_base.id

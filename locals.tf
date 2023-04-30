@@ -51,7 +51,7 @@ locals {
       module.butane_common_snippets.hostname,
       module.butane_common_snippets.keymap,
       module.butane_common_snippets.timezone,
-      module.butane_common_snippets.updates_periodic_window,
+      module.butane_common_snippets.periodic_updates,
       module.butane_common_snippets.rollout_wariness,
       module.butane_common_snippets.core_authorized_key,
       module.butane_common_snippets.static_interface,
