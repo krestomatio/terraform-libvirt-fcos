@@ -64,6 +64,8 @@ resource "libvirt_ignition" "node" {
 }
 
 resource "libvirt_domain" "node" {
+  depends_on = [libvirt_volume.root]
+
   name       = local.hostname
   memory     = var.memory
   vcpu       = var.vcpu
@@ -103,6 +105,9 @@ resource "libvirt_domain" "node" {
   }
 
   lifecycle {
+    replace_triggered_by = [
+      libvirt_volume.root.id
+    ]
     ignore_changes = [
       # Avoid replacement on ignore changes since shutdown is not managed properly.
       # Implementation of https://github.com/dmacvicar/terraform-provider-libvirt/issues/356 could avoid doing this
