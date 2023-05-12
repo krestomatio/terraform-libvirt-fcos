@@ -24,7 +24,7 @@ The following are the dependencies to create k3s cluster with this module:
 
 | Name                                                                                                       | Source                                         | Version |
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ------- |
-| <a name="module_butane_common_snippets"></a> [butane\_common\_snippets](#module\_butane\_common\_snippets) | krestomatio/butane-snippets/ct//modules/common | 0.0.9   |
+| <a name="module_butane_common_snippets"></a> [butane\_common\_snippets](#module\_butane\_common\_snippets) | krestomatio/butane-snippets/ct//modules/common | 0.0.12   |
 
 ## Resources
 
