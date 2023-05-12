@@ -13,7 +13,7 @@ module "butane_common_snippets" {
   etc_hosts           = var.etc_hosts
   disks               = local.storage.disks
   filesystems         = local.storage.filesystems
-  additional_rpms     = local.os_additional_rpms
+  additional_rpms     = local.additional_rpms
   systemd_pager       = var.systemd_pager
   sync_time_with_host = var.sync_time_with_host
   do_not_countme      = var.do_not_countme
