@@ -72,6 +72,20 @@ resource "libvirt_domain" "node" {
   qemu_agent = var.qemu_agent
   autostart  = var.autostart
 
+  arch     = var.arch
+  cmdline  = var.cmdline
+  emulator = var.emulator
+  machine  = var.machine
+  firmware = var.firmware
+
+  dynamic "nvram" {
+    for_each = var.nvram != null ? [1] : []
+    content {
+      file     = var.nvram.file
+      template = var.nvram.template
+    }
+  }
+
   # fw_cfg_name     = "opt/com.coreos/config"
   coreos_ignition = libvirt_ignition.node.id
 
@@ -100,8 +114,14 @@ resource "libvirt_domain" "node" {
     wait_for_lease = var.wait_for_lease
   }
 
-  video {
-    type = "virtio"
+  console {
+    type        = "pty"
+    target_port = "0"
+    target_type = "serial"
+  }
+
+  xml {
+    xslt = local.xslt
   }
 
   lifecycle {
@@ -109,6 +129,9 @@ resource "libvirt_domain" "node" {
       libvirt_volume.root.id
     ]
     ignore_changes = [
+      # TODO: investigate why firmware and nvram are not being applied in aarch64
+      firmware,
+      nvram,
       # Avoid replacement on ignore changes since shutdown is not managed properly.
       # Implementation of https://github.com/dmacvicar/terraform-provider-libvirt/issues/356 could avoid doing this
       # Manual replacement recommended to handle shutdown and order properly

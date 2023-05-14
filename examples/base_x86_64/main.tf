@@ -52,13 +52,13 @@ locals {
 
   # network
   net_cidr_ipv4 = "10.10.14.0/24"
-  net_cidr_ipv6 = "2001:db8:ca2:4::/64"
+  net_cidr_ipv6 = "2001:db8:ca2:14::/64"
 
   # image
-  fcos_image_version   = "37.20230303.3.0"
+  fcos_image_version   = "38.20230414.3.0"
   fcos_image_arch      = "x86_64"
   fcos_image_stream    = "stable"
-  fcos_image_sha256sum = "98bf7b4707439ac8a0cc35ced01f5fab450ccbe5be56d8ae1a7b630d1c3ab0ae"
+  fcos_image_sha256sum = "1c036b1c57517a92f69038169cc4e9a7b327d5704732285d5d632ad9965a0436"
   fcos_image_url       = "https://builds.coreos.fedoraproject.org/prod/streams/${local.fcos_image_stream}/builds/${local.fcos_image_version}/${local.fcos_image_arch}/fedora-coreos-${local.fcos_image_version}-qemu.${local.fcos_image_arch}.qcow2.xz"
   fcos_image_name      = "fcos-${local.fcos_image_stream}-${local.fcos_image_version}-${local.fcos_image_arch}.qcow2"
 }

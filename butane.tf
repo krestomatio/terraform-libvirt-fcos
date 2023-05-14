@@ -6,6 +6,7 @@ module "butane_common_snippets" {
   ssh_authorized_key  = var.ssh_authorized_key
   nameservers         = var.nameservers
   timezone            = var.timezone
+  interface_name      = var.interface_name
   keymap              = var.keymap
   rollout_wariness    = var.rollout_wariness
   periodic_updates    = var.periodic_updates

@@ -65,4 +65,33 @@ locals {
     ]
   )
   butane_snippets = concat(local.butane_k3s_snippets, var.butane_snippets_additional)
+  xslt            = <<TEMPLATE
+<?xml version="1.0" ?>
+<xsl:stylesheet version="1.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output omit-xml-declaration="yes" indent="yes"/>
+  <xsl:template match="node()|@*">
+    <xsl:copy>
+      <xsl:apply-templates select="node()|@*"/>
+    </xsl:copy>
+  </xsl:template>
+
+  <xsl:template match="/domain">
+    <xsl:copy>
+      <xsl:apply-templates select="node()|@*" />
+      <xsl:element name="metadata">
+        <libosinfo:libosinfo xmlns:libosinfo="http://libosinfo.org/xmlns/libvirt/domain/1.0">
+          <xsl:element name="libosinfo:os">
+            <xsl:attribute name="id">${var.libosinfo_id}</xsl:attribute>
+          </xsl:element>
+        </libosinfo:libosinfo>
+      </xsl:element>
+    </xsl:copy>
+  </xsl:template>
+
+  %{~if var.xslt_snippet != ""~}
+  ${var.xslt_snippet}
+  %{~endif~}
+</xsl:stylesheet>
+TEMPLATE
 }
