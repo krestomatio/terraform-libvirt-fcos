@@ -102,7 +102,7 @@ variable "keymap" {
 variable "sync_time_with_host" {
   type        = bool
   description = "Sync guest time with the kvm host"
-  default     = true
+  default     = null
 }
 
 variable "etc_hosts" {
