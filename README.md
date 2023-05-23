@@ -24,7 +24,7 @@ The following are the dependencies to create k3s cluster with this module:
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_butane_common_snippets"></a> [butane\_common\_snippets](#module\_butane\_common\_snippets) | krestomatio/butane-snippets/ct//modules/common | 0.0.13 |
+| <a name="module_butane_common_snippets"></a> [butane\_common\_snippets](#module\_butane\_common\_snippets) | krestomatio/butane-snippets/ct//modules/common | 0.0.27 |
 
 ## Resources
 
@@ -92,6 +92,7 @@ The following are the dependencies to create k3s cluster with this module:
 | <a name="input_root_volume_size"></a> [root\_volume\_size](#input\_root\_volume\_size) | Node default root volume size in bytes | `number` | `21474836480` | no |
 | <a name="input_ssh_authorized_key"></a> [ssh\_authorized\_key](#input\_ssh\_authorized\_key) | Authorized ssh key for core user | `string` | n/a | yes |
 | <a name="input_sync_time_with_host"></a> [sync\_time\_with\_host](#input\_sync\_time\_with\_host) | Sync guest time with the kvm host | `bool` | `null` | no |
+| <a name="input_sysctl"></a> [sysctl](#input\_sysctl) | Additional kernel tuning in sysctl.d | `map(string)` | <pre>{<br>  "vm.swappiness": "0"<br>}</pre> | no |
 | <a name="input_systemd_pager"></a> [systemd\_pager](#input\_systemd\_pager) | Systemd pager | `string` | `"cat"` | no |
 | <a name="input_timezone"></a> [timezone](#input\_timezone) | Timezone for VMs as listed by `timedatectl list-timezones` | `string` | `null` | no |
 | <a name="input_vcpu"></a> [vcpu](#input\_vcpu) | Node default vcpu count | `number` | `1` | no |

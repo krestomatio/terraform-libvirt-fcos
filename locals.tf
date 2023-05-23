@@ -61,6 +61,7 @@ locals {
       module.butane_common_snippets.additional_rpms,
       module.butane_common_snippets.sync_time_with_host,
       module.butane_common_snippets.systemd_pager,
+      module.butane_common_snippets.sysctl,
       module.butane_common_snippets.do_not_countme
     ]
   )

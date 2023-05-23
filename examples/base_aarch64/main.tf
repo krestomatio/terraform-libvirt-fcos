@@ -36,12 +36,16 @@ locals {
   sync_time_with_host        = false
   qemu_agent                 = true
   systemd_pager              = "cat"
-  ssh_authorized_key         = file(pathexpand("~/.ssh/id_rsa.pub"))
-  nameservers                = ["8.8.8.8"]
-  timezone                   = "America/Costa_Rica"
-  do_not_countme             = true
-  keymap                     = "latam"
-  rollout_wariness           = "0.5"
+  sysctl = {
+    "vm.swappiness"      = "0"
+    "net.core.somaxconn" = "32768"
+  }
+  ssh_authorized_key = file(pathexpand("~/.ssh/id_rsa.pub"))
+  nameservers        = ["8.8.8.8"]
+  timezone           = "America/Costa_Rica"
+  do_not_countme     = true
+  keymap             = "latam"
+  rollout_wariness   = "0.5"
   additional_rpms = {
     list = ["nano"]
   }
@@ -132,6 +136,7 @@ module "libvirt_fcos_base" {
   interface_name             = local.interface_name
   qemu_agent                 = local.qemu_agent
   systemd_pager              = local.systemd_pager
+  sysctl                     = local.sysctl
   ssh_authorized_key         = local.ssh_authorized_key
   nameservers                = local.nameservers
   timezone                   = local.timezone

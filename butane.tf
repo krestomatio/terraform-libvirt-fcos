@@ -1,6 +1,6 @@
 module "butane_common_snippets" {
   source  = "krestomatio/butane-snippets/ct//modules/common"
-  version = "0.0.13"
+  version = "0.0.27"
 
   hostname            = var.fqdn
   ssh_authorized_key  = var.ssh_authorized_key
@@ -16,6 +16,7 @@ module "butane_common_snippets" {
   filesystems         = local.storage.filesystems
   additional_rpms     = local.additional_rpms
   systemd_pager       = var.systemd_pager
+  sysctl              = var.sysctl
   sync_time_with_host = var.sync_time_with_host
   do_not_countme      = var.do_not_countme
 }
