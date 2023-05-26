@@ -12,8 +12,8 @@ module "butane_common_snippets" {
   periodic_updates    = var.periodic_updates
   cidr_ip_address     = var.cidr_ip_address
   etc_hosts           = var.etc_hosts
-  disks               = local.storage.disks
-  filesystems         = local.storage.filesystems
+  disks               = local.default_storage.disks
+  filesystems         = local.default_storage.filesystems
   additional_rpms     = local.additional_rpms
   systemd_pager       = var.systemd_pager
   sysctl              = var.sysctl

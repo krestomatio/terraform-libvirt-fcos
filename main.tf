@@ -98,9 +98,14 @@ resource "libvirt_domain" "node" {
   }
 
   dynamic "disk" {
-    for_each = local.libvirt_domain_additional_disks
+    for_each = local.additional_disks
     content {
-      volume_id = disk.value.volume_id
+      volume_id    = try(disk.value.volume_id, null)
+      url          = try(disk.value.url, null)
+      file         = try(disk.value.file, null)
+      block_device = try(disk.value.block_device, null)
+      scsi         = try(disk.value.scsi, null)
+      wwn          = try(disk.value.wwn, null)
     }
   }
 
