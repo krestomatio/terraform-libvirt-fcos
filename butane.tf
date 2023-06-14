@@ -1,6 +1,6 @@
 module "butane_common_snippets" {
   source  = "krestomatio/butane-snippets/ct//modules/common"
-  version = "0.0.27"
+  version = "0.0.32"
 
   hostname            = var.fqdn
   ssh_authorized_key  = var.ssh_authorized_key
@@ -12,6 +12,7 @@ module "butane_common_snippets" {
   periodic_updates    = var.periodic_updates
   cidr_ip_address     = var.cidr_ip_address
   etc_hosts           = var.etc_hosts
+  etc_hosts_extra     = var.etc_hosts_extra
   disks               = local.default_storage.disks
   filesystems         = local.default_storage.filesystems
   additional_rpms     = local.additional_rpms

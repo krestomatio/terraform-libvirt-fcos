@@ -24,7 +24,7 @@ The following are the dependencies to create k3s cluster with this module:
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_butane_common_snippets"></a> [butane\_common\_snippets](#module\_butane\_common\_snippets) | krestomatio/butane-snippets/ct//modules/common | 0.0.27 |
+| <a name="module_butane_common_snippets"></a> [butane\_common\_snippets](#module\_butane\_common\_snippets) | krestomatio/butane-snippets/ct//modules/common | 0.0.32 |
 
 ## Resources
 
@@ -42,6 +42,7 @@ The following are the dependencies to create k3s cluster with this module:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_additional_disks"></a> [additional\_disks](#input\_additional\_disks) | An array of one or more disks to attach to the domain. See [docs](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.1/docs/resources/domain#handling-disks) | <pre>list(<br>    object(<br>      {<br>        volume_id    = optional(string)<br>        url          = optional(string)<br>        file         = optional(string)<br>        block_device = optional(string)<br>        scsi         = optional(bool)<br>        wwn          = optional(string)<br>      }<br>    )<br>  )</pre> | `[]` | no |
 | <a name="input_additional_rpms"></a> [additional\_rpms](#input\_additional\_rpms) | Additional rpms to install during boot using rpm-ostree, along with any pre or post command | <pre>object(<br>    {<br>      cmd_pre  = optional(list(string), [])<br>      list     = optional(list(string), [])<br>      cmd_post = optional(list(string), [])<br>    }<br>  )</pre> | <pre>{<br>  "cmd_post": [],<br>  "cmd_pre": [],<br>  "list": []<br>}</pre> | no |
 | <a name="input_arch"></a> [arch](#input\_arch) | The architecture for the VM (probably x86\_64 or i686), you normally won't need to set this unless you are building a special VM | `string` | `null` | no |
 | <a name="input_autostart"></a> [autostart](#input\_autostart) | Autostart with libvirt host | `bool` | `true` | no |
