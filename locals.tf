@@ -1,6 +1,6 @@
 locals {
   hostname        = var.fqdn
-  additional_rpms = var.qemu_agent ? { list = concat(var.additional_rpms.list, ["qemu-guest-agent"]), cmd_post = concat(var.additional_rpms.cmd_post, ["/usr/bin/systemctl enable --now qemu-guest-agent.service"]), cmd_pre = var.additional_rpms.cmd_pre } : var.additional_rpms
+  additional_rpms = var.qemu_agent ? { list = concat(var.additional_rpms.list, ["qemu-guest-agent"]), cmd_post = var.additional_rpms.cmd_post, cmd_pre = var.additional_rpms.cmd_pre } : var.additional_rpms
   additional_disks = flatten(
     [
       var.log_volume ? [{ volume_id = libvirt_volume.log[0].id }] : [],
