@@ -104,3 +104,6 @@ The following are the dependencies to create k3s cluster with this module:
 
 No outputs.
 <!-- END_TF_DOCS -->
+
+## [About Krestomatio](https://krestomatio.com/about)
+[Krestomatio is a managed service for Moodle™ e-learning platforms](https://krestomatio.com/). It allows you to have open-source instances managed by a service optimized for Moodle™, complete with an additional plugin pack and customization options.
