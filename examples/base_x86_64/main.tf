@@ -10,11 +10,11 @@ locals {
   log_volume_size     = 1024 * 1024 * 1024 * 5  # in bytes, 5 Gi
   data_volume_size    = 1024 * 1024 * 1024 * 10 # in bytes, 10 Gi
   backup_volume_size  = 1024 * 1024 * 1024 * 10 # in bytes, 10 Gi
+  swap_volume         = true
   sync_time_with_host = true
   qemu_agent          = true
   systemd_pager       = "cat"
   sysctl = {
-    "vm.swappiness"      = "0"
     "net.core.somaxconn" = "32768"
   }
   ssh_authorized_key = file(pathexpand("~/.ssh/id_rsa.pub"))
@@ -125,6 +125,7 @@ module "libvirt_fcos_base" {
   log_volume_size     = local.log_volume_size
   data_volume_size    = local.data_volume_size
   backup_volume_size  = local.backup_volume_size
+  swap_volume         = local.swap_volume
 
   root_base_volume_name = libvirt_volume.fcos_image.name
   network_id            = libvirt_network.libvirt_fcos_base.id

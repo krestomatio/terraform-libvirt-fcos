@@ -6,20 +6,23 @@ locals {
       var.log_volume ? [{ volume_id = libvirt_volume.log[0].id }] : [],
       var.data_volume ? [{ volume_id = libvirt_volume.data[0].id }] : [],
       var.backup_volume ? [{ volume_id = libvirt_volume.backup[0].id }] : [],
+      var.swap_volume ? [{ volume_id = libvirt_volume.swap[0].id }] : [],
       var.additional_disks
     ]
   )
   default_storage_disks = flatten(
     [
-      var.log_volume ? [{ label = "log", path = var.log_volume_path }] : [],
-      var.data_volume ? [{ label = "data", path = var.data_volume_path }] : [],
-      var.backup_volume ? [{ label = "backup", path = var.backup_volume_path }] : []
+      var.log_volume ? [{ label = "log", path = var.log_volume_path, format = "xfs" }] : [],
+      var.data_volume ? [{ label = "data", path = var.data_volume_path, format = "xfs" }] : [],
+      var.backup_volume ? [{ label = "backup", path = var.backup_volume_path, format = "xfs" }] : [],
+      var.swap_volume ? [{ label = "swap", path = var.swap_volume_path, format = "swap" }] : []
     ]
   )
   default_disk_devices = [
     "/dev/vdb",
     "/dev/vdc",
-    "/dev/vdd"
+    "/dev/vdd",
+    "/dev/vde"
   ]
   default_storage = {
     disks = [for index, disk in local.default_storage_disks :
@@ -41,7 +44,7 @@ locals {
       {
         device          = "/dev/disk/by-partlabel/${disk.label}"
         path            = disk.path
-        format          = "xfs"
+        format          = disk.format
         label           = disk.label
         with_mount_unit = true
       }

@@ -57,6 +57,21 @@ resource "libvirt_volume" "backup" {
   }
 }
 
+resource "libvirt_volume" "swap" {
+  count = var.swap_volume ? 1 : 0
+
+  name = var.swap_volume_format != "" ? "${local.hostname}-swap.${var.swap_volume_format}" : "${local.hostname}-swap"
+  pool = var.swap_volume_pool
+  size = var.swap_volume_size
+
+  lifecycle {
+    ignore_changes = [
+      # https://github.com/dmacvicar/terraform-provider-libvirt/issues/952
+      size
+    ]
+  }
+}
+
 resource "libvirt_ignition" "node" {
   name    = "${local.hostname}.ign"
   pool    = var.ignition_pool

@@ -1,6 +1,6 @@
 module "butane_common_snippets" {
   source  = "krestomatio/butane-snippets/ct//modules/common"
-  version = "0.0.36"
+  version = "0.0.40"
 
   hostname            = var.fqdn
   ssh_authorized_key  = var.ssh_authorized_key

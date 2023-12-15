@@ -37,7 +37,6 @@ locals {
   qemu_agent                 = true
   systemd_pager              = "cat"
   sysctl = {
-    "vm.swappiness"      = "0"
     "net.core.somaxconn" = "32768"
   }
   ssh_authorized_key = file(pathexpand("~/.ssh/id_rsa.pub"))

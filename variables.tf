@@ -23,9 +23,7 @@ variable "systemd_pager" {
 variable "sysctl" {
   description = "Additional kernel tuning in sysctl.d"
   type        = map(string)
-  default = {
-    "vm.swappiness" = "0"
-  }
+  default     = null
 }
 
 # butane common
@@ -380,6 +378,40 @@ variable "backup_volume_size" {
   type        = number
   description = "Node default backup volume size in bytes"
   default     = 1024 * 1024 * 1024 * 20 # in bytes, 20 Gi
+  nullable    = false
+}
+
+variable "swap_volume" {
+  type        = bool
+  description = "Create swap volume"
+  default     = false
+  nullable    = false
+}
+
+variable "swap_volume_format" {
+  type        = string
+  description = "Node default swap volume mount format"
+  default     = "qcow2"
+  nullable    = false
+}
+
+variable "swap_volume_path" {
+  type        = string
+  description = "Node default swap volume mount path "
+  default     = "/var/mnt/swap"
+  nullable    = false
+}
+
+variable "swap_volume_pool" {
+  type        = string
+  description = "Node default swap volume pool"
+  default     = null
+}
+
+variable "swap_volume_size" {
+  type        = number
+  description = "Node default swap volume size in bytes"
+  default     = 1024 * 1024 * 1024 * 1 # in bytes, 1 Gi
   nullable    = false
 }
 
