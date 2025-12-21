@@ -140,6 +140,16 @@ resource "libvirt_domain" "node" {
     target_type = "serial"
   }
 
+  video {
+    type = "virtio"
+  }
+
+  graphics {
+    type        = "vnc"
+    listen_type = "address"
+    autoport    = "true"
+  }
+
   xml {
     xslt = local.xslt
   }
