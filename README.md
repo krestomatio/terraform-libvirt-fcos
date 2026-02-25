@@ -11,31 +11,32 @@ The following are the dependencies to create k3s cluster with this module:
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2.0 |
 | <a name="requirement_ct"></a> [ct](#requirement\_ct) | 0.11.0 |
-| <a name="requirement_libvirt"></a> [libvirt](#requirement\_libvirt) | ~> 0.7 |
+| <a name="requirement_libvirt"></a> [libvirt](#requirement\_libvirt) | 0.7.6 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_ct"></a> [ct](#provider\_ct) | 0.11.0 |
-| <a name="provider_libvirt"></a> [libvirt](#provider\_libvirt) | ~> 0.7 |
+| <a name="provider_libvirt"></a> [libvirt](#provider\_libvirt) | 0.7.6 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_butane_common_snippets"></a> [butane\_common\_snippets](#module\_butane\_common\_snippets) | krestomatio/butane-snippets/ct//modules/common | 0.0.33 |
+| <a name="module_butane_common_snippets"></a> [butane\_common\_snippets](#module\_butane\_common\_snippets) | krestomatio/butane-snippets/ct//modules/common | 0.0.99 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [libvirt_domain.node](https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs/resources/domain) | resource |
-| [libvirt_ignition.node](https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs/resources/ignition) | resource |
-| [libvirt_volume.backup](https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs/resources/volume) | resource |
-| [libvirt_volume.data](https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs/resources/volume) | resource |
-| [libvirt_volume.log](https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs/resources/volume) | resource |
-| [libvirt_volume.root](https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs/resources/volume) | resource |
+| [libvirt_domain.node](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.6/docs/resources/domain) | resource |
+| [libvirt_ignition.node](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.6/docs/resources/ignition) | resource |
+| [libvirt_volume.backup](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.6/docs/resources/volume) | resource |
+| [libvirt_volume.data](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.6/docs/resources/volume) | resource |
+| [libvirt_volume.log](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.6/docs/resources/volume) | resource |
+| [libvirt_volume.root](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.6/docs/resources/volume) | resource |
+| [libvirt_volume.swap](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.6/docs/resources/volume) | resource |
 | [ct_config.node](https://registry.terraform.io/providers/poseidon/ct/0.11.0/docs/data-sources/config) | data source |
 
 ## Inputs
@@ -92,8 +93,13 @@ The following are the dependencies to create k3s cluster with this module:
 | <a name="input_root_volume_pool"></a> [root\_volume\_pool](#input\_root\_volume\_pool) | Node default root volume pool | `string` | `null` | no |
 | <a name="input_root_volume_size"></a> [root\_volume\_size](#input\_root\_volume\_size) | Node default root volume size in bytes | `number` | `21474836480` | no |
 | <a name="input_ssh_authorized_key"></a> [ssh\_authorized\_key](#input\_ssh\_authorized\_key) | Authorized ssh key for core user | `string` | n/a | yes |
+| <a name="input_swap_volume"></a> [swap\_volume](#input\_swap\_volume) | Create swap volume | `bool` | `false` | no |
+| <a name="input_swap_volume_format"></a> [swap\_volume\_format](#input\_swap\_volume\_format) | Node default swap volume mount format | `string` | `"qcow2"` | no |
+| <a name="input_swap_volume_path"></a> [swap\_volume\_path](#input\_swap\_volume\_path) | Node default swap volume mount path | `string` | `"/var/mnt/swap"` | no |
+| <a name="input_swap_volume_pool"></a> [swap\_volume\_pool](#input\_swap\_volume\_pool) | Node default swap volume pool | `string` | `null` | no |
+| <a name="input_swap_volume_size"></a> [swap\_volume\_size](#input\_swap\_volume\_size) | Node default swap volume size in bytes | `number` | `1073741824` | no |
 | <a name="input_sync_time_with_host"></a> [sync\_time\_with\_host](#input\_sync\_time\_with\_host) | Sync guest time with the kvm host | `bool` | `null` | no |
-| <a name="input_sysctl"></a> [sysctl](#input\_sysctl) | Additional kernel tuning in sysctl.d | `map(string)` | <pre>{<br>  "vm.swappiness": "0"<br>}</pre> | no |
+| <a name="input_sysctl"></a> [sysctl](#input\_sysctl) | Additional kernel tuning in sysctl.d | `map(string)` | `null` | no |
 | <a name="input_systemd_pager"></a> [systemd\_pager](#input\_systemd\_pager) | Systemd pager | `string` | `"cat"` | no |
 | <a name="input_timezone"></a> [timezone](#input\_timezone) | Timezone for VMs as listed by `timedatectl list-timezones` | `string` | `null` | no |
 | <a name="input_vcpu"></a> [vcpu](#input\_vcpu) | Node default vcpu count | `number` | `1` | no |
