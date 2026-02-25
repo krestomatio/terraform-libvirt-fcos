@@ -1,8 +1,10 @@
 Terraform module to quickly generate a virtual machine using [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/) and [Libvirt](https://libvirt.org/).
 
 ## Dependencies
+
 The following are the dependencies to create k3s cluster with this module:
-* [libvirt](https://libvirt.org/)
+
+- [libvirt](https://libvirt.org/)
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -24,7 +26,7 @@ The following are the dependencies to create k3s cluster with this module:
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_butane_common_snippets"></a> [butane\_common\_snippets](#module\_butane\_common\_snippets) | krestomatio/butane-snippets/ct//modules/common | 0.0.100 |
+| <a name="module_butane_common_snippets"></a> [butane\_common\_snippets](#module\_butane\_common\_snippets) | krestomatio/butane-snippets/ct//modules/common | v0.0.101 |
 
 ## Resources
 
@@ -112,4 +114,5 @@ No outputs.
 <!-- END_TF_DOCS -->
 
 ## [About Krestomatio](https://krestomatio.com/about)
+
 [Krestomatio is a managed service for Moodle™ e-learning platforms](https://krestomatio.com/). It allows you to have open-source instances managed by a service optimized for Moodle™, complete with an additional plugin pack and customization options.
